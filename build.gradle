@@ -1,0 +1,33 @@
+plugins {
+    id 'java'
+    id 'java-library'
+    id 'antlr'
+}
+
+group 'com.hermant'
+version '0.1'
+sourceCompatibility = '8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    antlr 'org.antlr:antlr4:4.8-1'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.6.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testImplementation 'org.assertj:assertj-core:3.11.1'
+    testImplementation 'org.mockito:mockito-core:3.5.13'
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+generateGrammarSource {
+    outputDirectory = file("src/main/java/com/hermant/generated")
+    arguments += ['-visitor', '-no-listener']
+}
